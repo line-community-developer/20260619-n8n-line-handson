@@ -1,0 +1,174 @@
+{
+  "name": "v1-ai-chat",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7f3a9c2e-1b4d-4e8a-9f6c-3d2a8b5e0c14",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-96, -96],
+      "id": "452bb363-b504-41da-bcc6-f5a3bf069a20",
+      "name": "Webhook",
+      "webhookId": "7f3a9c2e-1b4d-4e8a-9f6c-3d2a8b5e0c14"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/chat/loading/start",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"chatId\": \"{{ $('Webhook').item.json.body.events[0].source.userId }}\",\n    \"loadingSeconds\": 20\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [128, -96],
+      "id": "5b1c0d3e-9a42-4f87-b6c1-7e2d4a8f0c95",
+      "name": "Show Loading",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "LINE_BEARER_CREDENTIAL_ID_HERE",
+          "name": "LINE Channel Access Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Webhook').item.json.body.events[0].message.text }}",
+        "options": {
+          "systemMessage": "あなたはLINE上で動くパーソナルAI秘書です。返信はLINEのトークとして自然な、短く簡潔な日本語で書いてください。Markdown記法（# や ** など）は使わないでください。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [352, -96],
+      "id": "a1f5c8d2-6e3b-4a90-b7d4-58e2c91f0a36",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [288, 128],
+      "id": "b9e4d7a1-2c85-4f63-a0b9-71d3e8c45f02",
+      "name": "Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "GEMINI_CREDENTIAL_ID_HERE",
+          "name": "Google Gemini account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Webhook').item.json.body.events[0].source.userId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [448, 128],
+      "id": "c3a8f216-9d47-4b50-8e1a-64f9b0d27c88",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"replyToken\": \"{{ $('Webhook').item.json.body.events[0].replyToken }}\",\n    \"messages\":[\n        {\n            \"type\": \"textV2\",\n            \"text\": {{ JSON.stringify($json.output) }}\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [704, -96],
+      "id": "9fe17dc1-a0a7-4409-98da-042b0b68c86d",
+      "name": "LINE Reply Message",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "LINE_BEARER_CREDENTIAL_ID_HERE",
+          "name": "LINE Channel Access Token"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Show Loading",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Show Loading": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "LINE Reply Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
