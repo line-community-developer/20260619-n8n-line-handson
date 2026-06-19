@@ -9,8 +9,11 @@
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
-      "position": [-96, -96],
-      "id": "0df99e3e-e074-4850-b6a9-8d70da422981",
+      "position": [
+        -1104,
+        80
+      ],
+      "id": "c62cd8bd-a11a-4ca4-be1f-8192bb722cfa",
       "name": "Webhook",
       "webhookId": "9b4c6e2d-8a51-4f7e-b3d9-06c8e5a2f471"
     },
@@ -27,8 +30,11 @@
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
-      "position": [128, -96],
-      "id": "5b1c0d3e-9a42-4f87-b6c1-7e2d4a8f0c95",
+      "position": [
+        -880,
+        80
+      ],
+      "id": "f489f64f-bada-4415-ab35-19a40b741f60",
       "name": "Show Loading",
       "credentials": {
         "httpBearerAuth": {
@@ -121,8 +127,11 @@
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
-      "position": [352, -96],
-      "id": "efbf6e4c-70ea-45ae-91e2-8193420859e3",
+      "position": [
+        -656,
+        64
+      ],
+      "id": "457b9a91-d384-43a0-b2b1-9c9dc1029302",
       "name": "Switch"
     },
     {
@@ -135,8 +144,11 @@
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
-      "position": [1040, -160],
-      "id": "a1f5c8d2-6e3b-4a90-b7d4-58e2c91f0a36",
+      "position": [
+        16,
+        48
+      ],
+      "id": "a86fed16-edfb-4527-af69-78033b11c477",
       "name": "AI Agent"
     },
     {
@@ -146,8 +158,11 @@
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.1,
-      "position": [700, 80],
-      "id": "b9e4d7a1-2c85-4f63-a0b9-71d3e8c45f02",
+      "position": [
+        -32,
+        240
+      ],
+      "id": "7bf6f04d-df15-4a3b-831d-81fd4f5b17f4",
       "name": "Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
@@ -164,8 +179,11 @@
       },
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
-      "position": [840, 80],
-      "id": "c3a8f216-9d47-4b50-8e1a-64f9b0d27c88",
+      "position": [
+        112,
+        240
+      ],
+      "id": "08e292b1-4d24-45f6-b9dd-500bf620ffea",
       "name": "Simple Memory"
     },
     {
@@ -187,8 +205,11 @@
       },
       "type": "n8n-nodes-base.dataTableTool",
       "typeVersion": 1.1,
-      "position": [980, 80],
-      "id": "b8e3f1a6-2d74-4c09-9f51-3a6e8c0d7b42",
+      "position": [
+        256,
+        240
+      ],
+      "id": "0a7fd4af-fbbf-430d-84ce-1de31f7d22df",
       "name": "Read Memos Tool"
     },
     {
@@ -213,8 +234,11 @@
       },
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.2,
-      "position": [1040, 280],
-      "id": "a7d3f0b6-9c28-45e1-b54a-f8e60c1d2973",
+      "position": [
+        16,
+        464
+      ],
+      "id": "d90167dc-639e-476b-af80-09ea3bbb6f16",
       "name": "Summarize Memo",
       "credentials": {
         "googlePalmApi": {
@@ -229,8 +253,11 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1260, 280],
-      "id": "f4b2a7c1-3e58-49d0-8a16-2c9e7b0d4a63",
+      "position": [
+        352,
+        464
+      ],
+      "id": "bc543009-9fb9-4f8c-9e6c-0642b20f3b78",
       "name": "Parse Memo"
     },
     {
@@ -262,8 +289,11 @@
       },
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
-      "position": [1480, 280],
-      "id": "d9a4e7f2-3b61-48c5-a290-6f8d0b3c5e17",
+      "position": [
+        544,
+        464
+      ],
+      "id": "ad297ee4-bafe-498d-a79b-c93136744ade",
       "name": "Save Memo"
     },
     {
@@ -279,8 +309,11 @@
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
-      "position": [1280, -160],
-      "id": "67b8af01-ea88-4d3f-9fbb-11305f40b89c",
+      "position": [
+        384,
+        96
+      ],
+      "id": "c168c8e7-25cb-4061-a0bc-ae3616e827fc",
       "name": "LINE Reply Message",
       "credentials": {
         "httpBearerAuth": {
@@ -317,8 +350,11 @@
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
-      "position": [560, 304],
-      "id": "e8f1a3c7-4d62-49b5-a017-8c5e2f9d6b03",
+      "position": [
+        -448,
+        464
+      ],
+      "id": "1b8ce53a-df13-4a95-ac8c-24463d0f5d2e",
       "name": "Get Audio",
       "credentials": {
         "httpBearerAuth": {
@@ -343,8 +379,11 @@
       },
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.2,
-      "position": [760, 304],
-      "id": "f2c9d5e8-1a73-4b06-9e84-d361c0a7f592",
+      "position": [
+        -224,
+        464
+      ],
+      "id": "14786369-661e-40b9-800e-4f8ab2b74c75",
       "name": "Transcribe Audio",
       "credentials": {
         "googlePalmApi": {
